@@ -50,10 +50,29 @@ class BlackBloard {
     return this;
   }
   // 修改黑板背景颜色
-  public setBgColor() {
-    this.bgColor = "red";
+  public setBgColor(color: string) {
+    this.bgColor = color;
     this.canvas.fillStyle = this.bgColor;
     this.canvas.fillRect(0, 0, this.width, this.height);
+    return this; // 方便外部链式操作函数
+  }
+
+  // 修改画笔颜色
+  public setLineColor() {
+    const color = ['#1abc9c', '#3498db', '#f1c40f', '#e74c3c'];
+    const container = document.createElement('div');
+    container.classList.add('color-container');
+    color.forEach(item => {
+      const div = document.createElement('div');
+      div.classList.add('color-container-box');
+      div.style.cssText = `width:20px;height:20px;background:${item}`
+      container.insertAdjacentElement('afterbegin', div);
+      div.addEventListener('click', () => {
+        this.lineColor = item;
+      })
+    });
+    this.btnCont.insertAdjacentElement('beforebegin', container)
+    return this;
   }
   private initCanvas(): void {
     this.canvas.fillStyle = this.bgColor; // 颜料
@@ -61,8 +80,8 @@ class BlackBloard {
     // 初始化时添加按钮容器
     this.el.insertAdjacentElement('afterend', this.btnCont);
     this.btnCont.style.cssText = "margin-top: 10px"
-    this.clear();
   }
 
 }
 const init = new BlackBloard();
+init.clear().setLineColor();
