@@ -24,3 +24,6 @@ body {
   transform: scale(1.5);
   transition: 0.5s;
 }
+.img-shot {
+  width: 200px;
+}

@@ -101,6 +101,23 @@ class BlackBloard {
     })
     return this;
   }
+  // 截图功能
+  public show() {
+    // 添加按钮
+    const btn = document.createElement('button');
+    btn.innerHTML = '截图';
+    this.btnCont.insertAdjacentElement('beforeend', btn);
+    // 创建img标签接收canvas生成的图片
+    const img = document.createElement('img');
+    // 添加清除画布点击事件
+    btn.addEventListener('click', () => {
+      console.log(this.el.toDataURL())
+      img.src = this.el.toDataURL();
+      img.classList.add('img-shot');
+    })
+    this.btnCont.insertAdjacentElement('afterend', img);
+    return this;
+  }
   private initCanvas(): void {
     this.canvas.fillStyle = this.bgColor; // 颜料
     this.canvas.fillRect(0, 0, this.width, this.height); // 画
@@ -113,3 +130,4 @@ class BlackBloard {
 const init = new BlackBloard();
 init.clear().setLineColor();
 init.eraser();
+init.show();
