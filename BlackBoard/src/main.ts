@@ -47,6 +47,10 @@ class BlackBloard {
     btn.addEventListener('click', () => {
       this.canvas.fillStyle = this.bgColor;
       this.canvas.fillRect(0, 0, this.width, this.height);
+      const img = document.querySelector('.img-shot');
+      if (img) {
+        img.remove();
+      }
     })
     return this;
   }
