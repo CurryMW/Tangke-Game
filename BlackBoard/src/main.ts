@@ -16,6 +16,7 @@ class BlackBloard {
     this.initCanvas();
     // 监听写字
     this.bindEvents();
+    this.draw();
   }
   private bindEvents(): void {
     const callBack = this.drawLine.bind(this); // 使用bind会创建一个函数，必须手动调用，将函数this指向指定对象
@@ -74,6 +75,32 @@ class BlackBloard {
     this.btnCont.insertAdjacentElement('beforebegin', container)
     return this;
   }
+  // 橡皮擦
+  public eraser() {
+    // 添加按钮
+    const btn = document.createElement('button');
+    btn.innerHTML = '橡皮';
+    this.btnCont.insertAdjacentElement('afterbegin', btn);
+    // 添加清除画布点击事件
+    btn.addEventListener('click', () => {
+      this.lineColor = this.bgColor;
+      this.canvas.lineWidth = 10;
+    })
+    return this;
+  }
+  // 重新写功能
+  public draw() {
+    // 添加按钮
+    const btn = document.createElement('button');
+    btn.innerHTML = '写字';
+    this.btnCont.insertAdjacentElement('afterbegin', btn);
+    // 添加清除画布点击事件
+    btn.addEventListener('click', () => {
+      this.lineColor = 'white';
+      this.canvas.lineWidth = 1;
+    })
+    return this;
+  }
   private initCanvas(): void {
     this.canvas.fillStyle = this.bgColor; // 颜料
     this.canvas.fillRect(0, 0, this.width, this.height); // 画
@@ -85,3 +112,4 @@ class BlackBloard {
 }
 const init = new BlackBloard();
 init.clear().setLineColor();
+init.eraser();
